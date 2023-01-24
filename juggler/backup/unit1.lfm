@@ -8,7 +8,7 @@ object MainForm: TMainForm
   ClientWidth = 630
   OnCreate = FormCreate
   OnShow = FormShow
-  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width;RadioGroup1.Enabled'
+  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width'
   LCLVersion = '2.2.4.0'
   object LogMemo: TMemo
     AnchorSideTop.Control = ClearBox
@@ -71,8 +71,8 @@ object MainForm: TMainForm
     ClientWidth = 512
     ItemIndex = 0
     Items.Strings = (
-      '1'
-      '2'
+      '1/2'
+      '2/1'
     )
     TabOrder = 1
     object Label4: TLabel
@@ -114,7 +114,7 @@ object MainForm: TMainForm
       Anchors = [akTop, akRight]
       BorderSpacing.Left = 3
       BorderSpacing.Right = 3
-      TabOrder = 1
+      TabOrder = 0
       Text = 'wg0'
     end
     object Shape1: TShape
@@ -155,17 +155,17 @@ object MainForm: TMainForm
       Anchors = [akTop, akRight]
       BorderSpacing.Left = 3
       BorderSpacing.Right = 3
-      TabOrder = 2
+      TabOrder = 1
       Text = 'tun0'
     end
     object VPNService1: TComboBox
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Label3
-      Left = 58
+      Left = 64
       Height = 37
       Top = 4
-      Width = 172
+      Width = 166
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -176,17 +176,17 @@ object MainForm: TMainForm
         'protonvpn'
       )
       OnChange = VPNService1Change
-      TabOrder = 4
+      TabOrder = 2
       Text = 'luntikwg'
     end
     object VPNService2: TComboBox
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Label4
-      Left = 58
+      Left = 64
       Height = 37
       Top = 57
-      Width = 172
+      Width = 166
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -197,7 +197,7 @@ object MainForm: TMainForm
         'protonvpn'
       )
       OnChange = VPNService2Change
-      TabOrder = 5
+      TabOrder = 3
       Text = 'protonvpn'
     end
   end

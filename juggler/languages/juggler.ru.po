@@ -77,7 +77,6 @@ msgstr "Цикл завершен"
 msgid "Connection attempt, wait..."
 msgstr "Попытка подключения, ждите..."
 
-#: unit1.sstopvpn
-msgid "Stopping the connection"
-msgstr "Останов подключения"
-
+#: unit1.sstopresetvpn
+msgid "Stop/Reset the connection"
+msgstr "Стоп/Сброс подключения"

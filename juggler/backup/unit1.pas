@@ -48,7 +48,7 @@ var
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
-  SStopVPN = 'Stopping the connection';
+  SStopResetVPN = 'Stop/Reset the connection';
   SCycleCompleted = 'The cycle is completed';
 
 implementation
@@ -66,7 +66,7 @@ begin
   LogMemo.Append(SStopVPN);
   RunCommand('/bin/bash', ['-c', 'kill -9 $(cat /etc/juggler/pid); systemctl stop ' +
     VPNService1.Text + ' ' + VPNService2.Text + ' &'], s);
-    RadioGroup1.Enabled := True;
+  RadioGroup1.Enabled := True;
 end;
 
 procedure TMainForm.Timer1Timer(Sender: TObject);
@@ -179,6 +179,8 @@ begin
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
+var
+  s: ansistring;
 begin
   IniPropStorage1.Restore;
   Caption := Application.Title;
@@ -189,6 +191,10 @@ begin
   if FileExists('/etc/juggler/clear_cache') then ClearBox.Checked := True
   else
     ClearBox.Checked := False;
+
+  RunCommand('/bin/bash', ['-c',
+    '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
+  if Trim(s) = 'yes' then RadioGroup1.Enabled := False;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
