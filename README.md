@@ -12,4 +12,4 @@ Upload `*.conf` and `*.ovpn` configurations to `LuntikWG` and to any other clien
 
 **Note:** your individual systemd services and interfaces can be used as services and interfaces for monitoring/launching. Don't forget to open the necessary `iptables` ports.  
   
-![](https://github.com/AKotov-dev/juggler/blob/main/ScreenShot1.png)
+![](https://github.com/AKotov-dev/juggler/blob/main/ScreenShot2.png)
