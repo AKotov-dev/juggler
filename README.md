@@ -4,7 +4,7 @@ Layered VPN (WireGuard + OpenVPN)
 Dependencies: fping gtk2 luntikwg  
 Packages for linking: luntik, protonvpn, openvpngui 
   
-The juggler allows you to connect to vpn2 via vpn 1 and vice versa, even if vpn2 is blocked. It is important that these are different protocols: WireGuard and OpenVPN. [LuntikWG](https://github.com/AKotov-dev/luntikwg) (mandatory) and [OpenVPN-GUI](https://github.com/AKotov-dev/OpenVPN-GUI), [ProtonVPN-GUI](https://github.com/AKotov-dev/protonvpn-gui) or [Luntik](https://github.com/AKotov-dev/luntik) are used as reference clients/services.
+The juggler allows you to connect to vpn2 via vpn1 and vice versa, even if vpn2 is blocked. It is important that these are different protocols: WireGuard and OpenVPN. [LuntikWG](https://github.com/AKotov-dev/luntikwg) (mandatory) and [OpenVPN-GUI](https://github.com/AKotov-dev/OpenVPN-GUI), [ProtonVPN-GUI](https://github.com/AKotov-dev/protonvpn-gui) or [Luntik](https://github.com/AKotov-dev/luntik) are used as reference clients/services.
 
 How it works:
 --
