@@ -1,0 +1,79 @@
+[NAME]
+name=juggler
+
+[VERSION]
+version=0.1
+
+[RELEASE]
+release=0.mrx9
+
+[GROUP]
+group=Accessibility
+
+[DESCRIPTION]
+0=Layered VPN Connector
+1=---
+2=More information: /usr/share/doc/package_name/repack.txt
+
+[MAINTAINER]
+maintainer=Alex Kotov
+
+[VENDOR]
+vendor=alex_q_2000 (C) 2023
+
+[SUMMARY]
+summary=Layered VPN connector
+
+[URLCOPY]
+urlcopy=111
+
+[LICENSE]
+license=GPLv3
+
+[DEPS]
+deps=gtk2 fping luntikwg
+
+[META]
+meta=0
+
+[NOARCH]
+noarch=0
+
+[SIGN]
+sign=0
+
+[DEB]
+deb=0
+
+[FILES]
+0=/usr/bin/juggler
+1=/usr/share/juggler/
+2=/usr/share/icons/juggler.png
+3=/usr/share/applications/juggler.desktop
+4=/usr/share/polkit-1/actions/juggler.policy
+5=/usr/share/doc/juggler/
+
+[BEFOREREMOVE]
+0=#Окончательное удаление
+1=if [ $1 -eq 0 ]; then
+2=rm -rf /etc/juggler
+3=fi
+
+[URL32]
+url32=111
+
+[URL64]
+url64=
+
+[PROGRAMNAME]
+programname=Juggler
+
+[DEVTOOL]
+devtool=Lazarus
+
+[TOOLVERSION]
+toolversion=2.2.4
+
+[INFO]
+0=v0.1
+1=+ Initial release

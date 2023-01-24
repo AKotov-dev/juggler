@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: tmainform.caption
+msgid "juggler"
+msgstr ""
+
+#: tmainform.clearbox.caption
+msgctxt "tmainform.clearbox.caption"
+msgid "Clear browser cache and cookies at GUI startup"
+msgstr "Очистить кеш браузера и cookies при старте GUI"
+
+#: tmainform.interface1.text
+msgctxt "tmainform.interface1.text"
+msgid "wg0"
+msgstr ""
+
+#: tmainform.interface2.text
+msgctxt "tmainform.interface2.text"
+msgid "tun0"
+msgstr ""
+
+#: tmainform.label3.caption
+msgctxt "tmainform.label3.caption"
+msgid "...wait for the interface"
+msgstr "...ждать интерфейс"
+
+#: tmainform.label4.caption
+msgctxt "tmainform.label4.caption"
+msgid "...wait for the interface"
+msgstr "...ждать интерфейс"
+
+#: tmainform.radiogroup1.caption
+msgid "Choosing a Working and Blocked VPN"
+msgstr "Укажите Рабочий и Заблокированный VPN"
+
+#: tmainform.startbtn.caption
+msgctxt "tmainform.startbtn.caption"
+msgid "Start"
+msgstr "Старт"
+
+#: tmainform.statictext2.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2023   URL: https://linuxforum.ru"
+
+#: tmainform.stopbtn.caption
+msgctxt "tmainform.stopbtn.caption"
+msgid "Stop"
+msgstr "Стоп"
+
+#: tmainform.vpnservice1.text
+msgctxt "tmainform.vpnservice1.text"
+msgid "luntikwg"
+msgstr ""
+
+#: tmainform.vpnservice2.text
+msgctxt "tmainform.vpnservice2.text"
+msgid "protonvpn"
+msgstr ""
+
+#: unit1.scyclecompleted
+msgid "The cycle is completed"
+msgstr "Цикл завершен"
+
+#: unit1.sstartvpn
+msgid "Connection attempt, wait..."
+msgstr "Попытка подключения, ждите..."
+
+#: unit1.sstopresetvpn
+msgid "Stop/Reset the connection"
+msgstr "Стоп/Сброс подключения"
