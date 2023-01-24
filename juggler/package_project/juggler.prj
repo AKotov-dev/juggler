@@ -25,7 +25,7 @@ vendor=alex_q_2000 (C) 2023
 summary=Layered VPN connector
 
 [URLCOPY]
-urlcopy=111
+urlcopy=https://github.com/AKotov-dev/juggler
 
 [LICENSE]
 license=GPLv3
@@ -60,7 +60,7 @@ deb=0
 3=fi
 
 [URL32]
-url32=111
+url32=https://github.com/AKotov-dev/juggler
 
 [URL64]
 url64=
