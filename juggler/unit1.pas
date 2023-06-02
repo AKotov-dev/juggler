@@ -146,25 +146,26 @@ begin
 
       //D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
       D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
-        VPNService1.Text + ' ' + VPNService2.Text);
-
+        VPNService1.Text + ' ' + VPNService2.Text + ' 2>/dev/null');
       D.Add('systemctl restart ' + VPNService1.Text);
 
+      //Количество попыток attempt
+      D.Add('attempt=8');
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface1.Text + ') ]]; do sleep 1');
 
-      D.Add('((i++)); if [[ $i == 8 ]]; then systemctl stop ' +
+      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' attempt ${i}"; fi; done');
+        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl restart ' + VPNService2.Text);
 
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface2.Text + ') ]]; do sleep 1');
 
-      D.Add('((i++)); if [[ $i == 8 ]]; then systemctl stop ' +
+      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' attempt ${i}"; fi; done');
+        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService1.Text);
       // D.Add('exit 0');
@@ -182,21 +183,23 @@ begin
       D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
       D.Add('systemctl restart ' + VPNService2.Text);
 
+      //Количество попыток attempt
+      D.Add('attempt=8');
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface2.Text + ') ]]; do sleep 1');
 
-      D.Add('((i++)); if [[ $i == 8 ]]; then systemctl stop ' +
+      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' attempt ${i}"; fi; done');
+        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl restart ' + VPNService1.Text);
 
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface1.Text + ') ]]; do sleep 1');
 
-      D.Add('((i++)); if [[ $i == 8 ]]; then systemctl stop ' +
+      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' attempt ${i}"; fi; done');
+        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService2.Text);
     end;
@@ -205,7 +208,8 @@ begin
 
     //Stop connection "$1 == stop"
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
-      VPNService1.Text + ' ' + VPNService2.Text + '; kill -9 $(cat /etc/juggler/pid)');
+      VPNService1.Text + ' ' + VPNService2.Text +
+      ' 2>/dev/null; kill -9 $(cat /etc/juggler/pid)');
 
     D.Add('fi');
     //D.Add('');
