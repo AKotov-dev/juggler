@@ -158,7 +158,7 @@ begin
         VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
         Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
-      D.Add('systemctl restart ' + VPNService2.Text);
+      D.Add('sleep 1; systemctl restart ' + VPNService2.Text);
 
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface2.Text + ') ]]; do sleep 1');
@@ -192,7 +192,7 @@ begin
         VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
         Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
-      D.Add('systemctl restart ' + VPNService1.Text);
+      D.Add('sleep 1; systemctl restart ' + VPNService1.Text);
 
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
         Interface1.Text + ') ]]; do sleep 1');
