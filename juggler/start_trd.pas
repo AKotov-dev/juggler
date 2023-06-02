@@ -47,7 +47,7 @@ begin
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
 
-    ExProcess.Parameters.Add('/etc/juggler/juggler.sh');
+    ExProcess.Parameters.Add('/etc/juggler/juggler.sh start');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)

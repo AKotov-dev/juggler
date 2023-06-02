@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 293
-  Height = 347
-  Top = 124
-  Width = 630
+  Left = 283
+  Height = 358
+  Top = 126
+  Width = 637
   Caption = 'juggler'
-  ClientHeight = 347
-  ClientWidth = 630
+  ClientHeight = 358
+  ClientWidth = 637
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width'
@@ -15,9 +15,9 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 160
+    Height = 171
     Top = 170
-    Width = 630
+    Width = 637
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
@@ -29,7 +29,7 @@ object MainForm: TMainForm
   object StartBtn: TSpeedButton
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 532
+    Left = 539
     Height = 36
     Top = 8
     Width = 90
@@ -42,7 +42,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StartBtn
     AnchorSideRight.Control = StartBtn
     AnchorSideRight.Side = asrBottom
-    Left = 532
+    Left = 539
     Height = 37
     Top = 48
     Width = 90
@@ -55,7 +55,7 @@ object MainForm: TMainForm
     Left = 8
     Height = 120
     Top = 8
-    Width = 514
+    Width = 521
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
     BorderSpacing.Right = 10
@@ -68,7 +68,7 @@ object MainForm: TMainForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 102
-    ClientWidth = 512
+    ClientWidth = 519
     ItemIndex = 0
     Items.Strings = (
       '1/2'
@@ -79,7 +79,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface2
-      Left = 250
+      Left = 257
       Height = 17
       Top = 67
       Width = 134
@@ -92,7 +92,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface1
-      Left = 250
+      Left = 257
       Height = 17
       Top = 14
       Width = 134
@@ -107,7 +107,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape1
-      Left = 387
+      Left = 394
       Height = 37
       Top = 4
       Width = 80
@@ -122,7 +122,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface1
       AnchorSideTop.Side = asrCenter
-      Left = 472
+      Left = 479
       Height = 10
       Top = 17
       Width = 20
@@ -135,7 +135,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface2
       AnchorSideTop.Side = asrCenter
-      Left = 472
+      Left = 479
       Height = 10
       Top = 70
       Width = 20
@@ -148,7 +148,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape2
-      Left = 387
+      Left = 394
       Height = 37
       Top = 57
       Width = 80
@@ -165,7 +165,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 4
-      Width = 166
+      Width = 173
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -186,7 +186,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 57
-      Width = 166
+      Width = 173
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -204,8 +204,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 330
-    Width = 630
+    Top = 341
+    Width = 637
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Color = clDefault
@@ -228,14 +228,28 @@ object MainForm: TMainForm
     OnClick = ClearBoxClick
     TabOrder = 3
   end
+  object AutostartBox: TCheckBox
+    AnchorSideTop.Control = ClearBox
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 538
+    Height = 32
+    Top = 133
+    Width = 91
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 8
+    Caption = 'AutoStart'
+    OnChange = AutostartBoxChange
+    TabOrder = 4
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 512
-    Top = 208
+    Left = 128
+    Top = 192
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
-    Left = 432
-    Top = 208
+    Left = 48
+    Top = 192
   end
 end

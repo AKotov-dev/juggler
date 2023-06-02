@@ -35,7 +35,7 @@ procedure Start.Execute;
 var
   ExProcess: TProcess;
 begin
-  try //Вывод лога и прогресса
+  try //Вывод лога
     Synchronize(@StartProcess);
 
     FreeOnTerminate := True; //Уничтожить по завершении

@@ -13,6 +13,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    AutostartBox: TCheckBox;
     ClearBox: TCheckBox;
     VPNService1: TComboBox;
     IniPropStorage1: TIniPropStorage;
@@ -29,6 +30,7 @@ type
     StartBtn: TSpeedButton;
     StopBtn: TSpeedButton;
     VPNService2: TComboBox;
+    procedure AutostartBoxChange(Sender: TObject);
     procedure ClearBoxClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -59,16 +61,38 @@ uses start_trd;
 
 { TMainForm }
 
+//Проверка чекбокса AutoStart
+function CheckAutoStart: boolean;
+var
+  s: ansistring;
+begin
+  RunCommand('/bin/bash', ['-c',
+    '[[ -n $(systemctl is-enabled juggler | grep "enabled") ]] && echo "yes"'], s);
+
+  if Trim(s) = 'yes' then
+    Result := True
+  else
+    Result := False;
+end;
+
+//Стоп
 procedure TMainForm.StopBtnClick(Sender: TObject);
 var
   s: ansistring;
 begin
   LogMemo.Append(SStopResetVPN);
-  RunCommand('/bin/bash', ['-c', 'kill -9 $(cat /etc/juggler/pid); systemctl stop ' +
-    VPNService1.Text + ' ' + VPNService2.Text + ' &'], s);
+
+ { RunCommand('/bin/bash', ['-c', 'systemctl stop ' + VPNService1.Text +
+    ' ' + VPNService2.Text + '; kill -9 $(cat /etc/juggler/pid) &'], s);}
+  Application.ProcessMessages;
+
+  if FileExists('/etc/juggler/juggler.sh') then
+    RunCommand('/bin/bash', ['-c', '/etc/juggler/juggler.sh stop'], s);
+
   RadioGroup1.Enabled := True;
 end;
 
+//Индикация состояния интерфейсов
 procedure TMainForm.Timer1Timer(Sender: TObject);
 var
   s: ansistring;
@@ -114,6 +138,9 @@ begin
       D.Add('#!/bin/bash');
       D.Add('');
 
+      //Start connection "$1 == start"
+      D.Add('if [ "$1" == "start" ]; then');
+
       D.Add('echo $$ > /etc/juggler/pid');
       D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
       D.Add('systemctl restart ' + VPNService1.Text);
@@ -135,7 +162,7 @@ begin
         Interface2.Text + ' attempt ${i}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService1.Text);
-      D.Add('exit 0');
+      // D.Add('exit 0');
     end
     else
     begin
@@ -163,8 +190,19 @@ begin
         Interface1.Text + ' attempt ${i}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService2.Text);
-      D.Add('exit 0');
     end;
+
+    D.Add('else');
+
+    //Stop connection "$1 == stop"
+    D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text +
+      '; kill -9 $(cat /etc/juggler/pid)');
+
+    D.Add('fi');
+    D.Add('');
+
+    //Выход из скрипта не позволит запускать ExecStop отдельно (RemainAfterExit=yes)!
+    // D.Add('exit 0');
 
     D.SaveToFile('/etc/juggler/juggler.sh');
 
@@ -188,9 +226,13 @@ begin
   Shape2.Top := RadioGroup1.Height div 2 + RadioGroup1.Height div 8 + Shape2.Height;
   StopBtn.Height := StartBtn.Height;
 
+  //Проверка "Очистка сookies и кеш браузера"
   if FileExists('/etc/juggler/clear_cache') then ClearBox.Checked := True
   else
     ClearBox.Checked := False;
+
+  //Проверка AutoStart
+  AutoStartBox.Checked := CheckAutoStart;
 
   RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
@@ -208,6 +250,23 @@ begin
   if not ClearBox.Checked then DeleteFile('/etc/juggler/clear_cache')
   else
     LogMemo.Lines.SaveToFile('/etc/juggler/clear_cache');
+end;
+
+//Включение AutoStart
+procedure TMainForm.AutostartBoxChange(Sender: TObject);
+var
+  s: ansistring;
+begin
+  Screen.Cursor := crHourGlass;
+  Application.ProcessMessages;
+
+  if AutoStartBox.Checked then
+    RunCommand('/bin/bash', ['-c', 'systemctl enable juggler'], s)
+  else
+    RunCommand('/bin/bash', ['-c', 'systemctl disable juggler'], s);
+
+  AutoStartBox.Checked := CheckAutoStart;
+  Screen.Cursor := crDefault;
 end;
 
 end.

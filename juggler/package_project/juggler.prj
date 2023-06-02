@@ -2,7 +2,7 @@
 name=juggler
 
 [VERSION]
-version=0.1
+version=0.2
 
 [RELEASE]
 release=0.mrx9
@@ -39,19 +39,23 @@ meta=0
 [NOARCH]
 noarch=0
 
-[SIGN]
-sign=0
-
 [DEB]
 deb=0
 
 [FILES]
 0=/usr/bin/juggler
-1=/usr/share/juggler/
-2=/usr/share/icons/juggler.png
+1=/usr/share/icons/juggler.png
+2=/etc/systemd/system/juggler.service
 3=/usr/share/applications/juggler.desktop
 4=/usr/share/polkit-1/actions/juggler.policy
-5=/usr/share/doc/juggler/
+5=/usr/share/juggler/
+6=/usr/share/doc/juggler/
+
+[AFTERINSTALL]
+0=systemctl daemon-reload
+
+[AFTERREMOVE]
+0=systemctl daemon-reload
 
 [BEFOREREMOVE]
 0=#Окончательное удаление
@@ -61,9 +65,6 @@ deb=0
 
 [URL32]
 url32=https://github.com/AKotov-dev/juggler
-
-[URL64]
-url64=
 
 [PROGRAMNAME]
 programname=Juggler
@@ -75,5 +76,9 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.1
-1=+ Initial release
+0=v0.2
+1=+ Autorun on reboot
+2=+ RPM Packages for Mageia-9
+3=
+4=v0.1
+5=+ Initial release
