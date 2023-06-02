@@ -133,6 +133,7 @@ begin
   try
     D := TStringList.Create;
 
+    //Переключить 1/2
     if RadioGroup1.ItemIndex = 0 then
     begin
       D.Add('#!/bin/bash');
@@ -142,7 +143,11 @@ begin
       D.Add('if [ "$1" == "start" ]; then');
 
       D.Add('echo $$ > /etc/juggler/pid');
-      D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
+
+      //D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
+      D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
+        VPNService1.Text + ' ' + VPNService2.Text);
+
       D.Add('systemctl restart ' + VPNService1.Text);
 
       D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
@@ -166,8 +171,12 @@ begin
     end
     else
     begin
+      //Переключить 2/1
       D.Add('#!/bin/bash');
       D.Add('');
+
+      //Start connection "$1 == start"
+      D.Add('if [ "$1" == "start" ]; then');
 
       D.Add('echo $$ > /etc/juggler/pid');
       D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
@@ -192,14 +201,14 @@ begin
       D.Add('systemctl stop ' + VPNService2.Text);
     end;
 
-    D.Add('else');
+    D.Add('   else');
 
     //Stop connection "$1 == stop"
-    D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text +
-      '; kill -9 $(cat /etc/juggler/pid)');
+    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
+      VPNService1.Text + ' ' + VPNService2.Text + '; kill -9 $(cat /etc/juggler/pid)');
 
     D.Add('fi');
-    D.Add('');
+    //D.Add('');
 
     //Выход из скрипта не позволит запускать ExecStop отдельно (RemainAfterExit=yes)!
     // D.Add('exit 0');

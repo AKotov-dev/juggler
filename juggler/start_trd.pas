@@ -94,7 +94,9 @@ begin
   with MainForm do
   begin
     LogMemo.Append(SCycleCompleted);
-    LogMemo.Repaint;
+   // LogMemo.Repaint;
+    MainForm.Repaint;
+    Application.ProcessMessages;
   end;
 end;
 
