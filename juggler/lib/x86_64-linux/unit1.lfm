@@ -1,11 +1,11 @@
 object MainForm: TMainForm
   Left = 283
-  Height = 358
+  Height = 368
   Top = 126
-  Width = 637
+  Width = 612
   Caption = 'juggler'
-  ClientHeight = 358
-  ClientWidth = 637
+  ClientHeight = 368
+  ClientWidth = 612
   OnCreate = FormCreate
   OnShow = FormShow
   SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width'
@@ -15,9 +15,9 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 171
+    Height = 181
     Top = 170
-    Width = 637
+    Width = 612
     Align = alBottom
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
@@ -27,10 +27,11 @@ object MainForm: TMainForm
     WantReturns = False
   end
   object StartBtn: TSpeedButton
+    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 539
-    Height = 36
+    Left = 514
+    Height = 38
     Top = 8
     Width = 90
     Anchors = [akTop, akRight]
@@ -40,13 +41,14 @@ object MainForm: TMainForm
   end
   object StopBtn: TSpeedButton
     AnchorSideLeft.Control = StartBtn
-    AnchorSideRight.Control = StartBtn
+    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 539
-    Height = 37
-    Top = 48
+    Left = 514
+    Height = 38
+    Top = 49
     Width = 90
     Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 8
     Caption = 'Stop'
     OnClick = StopBtnClick
   end
@@ -55,7 +57,7 @@ object MainForm: TMainForm
     Left = 8
     Height = 120
     Top = 8
-    Width = 521
+    Width = 496
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
     BorderSpacing.Right = 10
@@ -68,7 +70,7 @@ object MainForm: TMainForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 102
-    ClientWidth = 519
+    ClientWidth = 494
     ItemIndex = 0
     Items.Strings = (
       '1/2'
@@ -79,7 +81,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface2
-      Left = 257
+      Left = 233
       Height = 17
       Top = 67
       Width = 134
@@ -92,7 +94,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface1
-      Left = 257
+      Left = 233
       Height = 17
       Top = 14
       Width = 134
@@ -107,7 +109,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape1
-      Left = 394
+      Left = 370
       Height = 37
       Top = 4
       Width = 80
@@ -122,7 +124,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface1
       AnchorSideTop.Side = asrCenter
-      Left = 479
+      Left = 455
       Height = 10
       Top = 17
       Width = 20
@@ -135,7 +137,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface2
       AnchorSideTop.Side = asrCenter
-      Left = 479
+      Left = 455
       Height = 10
       Top = 70
       Width = 20
@@ -148,7 +150,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape2
-      Left = 394
+      Left = 370
       Height = 37
       Top = 57
       Width = 80
@@ -165,7 +167,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 4
-      Width = 173
+      Width = 149
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -186,7 +188,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 57
-      Width = 173
+      Width = 149
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -204,8 +206,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 341
-    Width = 637
+    Top = 351
+    Width = 612
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Color = clDefault
@@ -219,24 +221,26 @@ object MainForm: TMainForm
   object ClearBox: TCheckBox
     AnchorSideTop.Control = RadioGroup1
     AnchorSideTop.Side = asrBottom
-    Left = 8
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 288
     Height = 32
     Top = 133
     Width = 316
+    Anchors = [akTop, akRight]
     BorderSpacing.Top = 5
+    BorderSpacing.Right = 8
     Caption = 'Clear browser cache and cookies at GUI startup'
     OnClick = ClearBoxClick
     TabOrder = 3
   end
   object AutostartBox: TCheckBox
     AnchorSideTop.Control = ClearBox
-    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 538
+    Left = 8
     Height = 32
     Top = 133
     Width = 91
-    Anchors = [akTop, akRight]
     BorderSpacing.Right = 8
     Caption = 'AutoStart'
     OnChange = AutostartBoxChange

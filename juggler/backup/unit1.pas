@@ -156,7 +156,7 @@ begin
 
       D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' attempt ${i} of ${attempt}"; fi; done');
+        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl restart ' + VPNService2.Text);
 
@@ -165,7 +165,7 @@ begin
 
       D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' attempt ${i} of ${attempt}"; fi; done');
+        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService1.Text);
       // D.Add('exit 0');
@@ -190,7 +190,7 @@ begin
 
       D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' attempt ${i} of ${attempt}"; fi; done');
+        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl restart ' + VPNService1.Text);
 
@@ -199,7 +199,7 @@ begin
 
       D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
         VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' attempt ${i} of ${attempt}"; fi; done');
+        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService2.Text);
     end;
