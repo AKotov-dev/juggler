@@ -90,6 +90,7 @@ begin
     RunCommand('/bin/bash', ['-c', '/etc/juggler/juggler.sh stop'], s);
 
   RadioGroup1.Enabled := True;
+  StartBtn.Enabled := True;
 end;
 
 //Индикация состояния интерфейсов
@@ -248,7 +249,11 @@ begin
 
   RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
-  if Trim(s) = 'yes' then RadioGroup1.Enabled := False;
+  if Trim(s) = 'yes' then
+  begin
+    RadioGroup1.Enabled := False;
+    StartBtn.Enabled := False;
+  end;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);

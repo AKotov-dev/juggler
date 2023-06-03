@@ -168,7 +168,6 @@ begin
         Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
 
       D.Add('systemctl stop ' + VPNService1.Text);
-      // D.Add('exit 0');
     end
     else
     begin
@@ -213,7 +212,6 @@ begin
       ' 2>/dev/null; kill -9 $(cat /etc/juggler/pid)');
 
     D.Add('fi');
-    //D.Add('');
 
     //Выход из скрипта не позволит запускать ExecStop отдельно (RemainAfterExit=yes)!
     // D.Add('exit 0');
@@ -250,7 +248,11 @@ begin
 
   RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
-  if Trim(s) = 'yes' then RadioGroup1.Enabled := False;
+  if Trim(s) = 'yes' then
+  begin
+    RadioGroup1.Enabled := False;
+    StartBtn.Enabled := False;
+  end;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
