@@ -141,13 +141,13 @@ begin
 
       //Start connection "$1 == start"
       D.Add('if [ "$1" == "start" ]; then');
-
       D.Add('echo $$ > /etc/juggler/pid');
 
-      //D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
+      //Стоп всех возможных сервисов
       D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
         VPNService1.Text + ' ' + VPNService2.Text + ' 2>/dev/null');
-      D.Add('systemctl restart ' + VPNService1.Text);
+      //Переходная пауза и рестарт первого подключения
+      D.Add('sleep 1; systemctl restart ' + VPNService1.Text);
 
       //Количество попыток attempt
       D.Add('attempt=8');
@@ -178,10 +178,11 @@ begin
 
       //Start connection "$1 == start"
       D.Add('if [ "$1" == "start" ]; then');
-
       D.Add('echo $$ > /etc/juggler/pid');
+      //Стоп всех возможных сервисов
       D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
-      D.Add('systemctl restart ' + VPNService2.Text);
+      //Переходная пауза и рестарт первого подключения
+      D.Add('sleep 1; systemctl restart ' + VPNService2.Text);
 
       //Количество попыток attempt
       D.Add('attempt=8');

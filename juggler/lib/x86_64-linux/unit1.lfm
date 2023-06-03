@@ -8,7 +8,7 @@ object MainForm: TMainForm
   ClientWidth = 612
   OnCreate = FormCreate
   OnShow = FormShow
-  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width'
+  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width;LogMemo.Lines'
   LCLVersion = '2.2.4.0'
   object LogMemo: TMemo
     AnchorSideTop.Control = ClearBox
