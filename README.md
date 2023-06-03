@@ -1,6 +1,4 @@
 # Juggler
-Layered VPN (WireGuard + OpenVPN) 
-
 **Dependencies:** fping gtk2 luntikwg  
 Packages for linking: luntik, protonvpn, openvpngui 
   
