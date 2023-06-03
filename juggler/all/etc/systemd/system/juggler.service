@@ -1,0 +1,13 @@
+[Unit]
+Description=Juggler
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/etc/juggler/juggler.sh start
+ExecStop=/etc/juggler/juggler.sh stop
+
+[Install]
+WantedBy=multi-user.target

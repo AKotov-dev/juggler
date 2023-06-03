@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Juggler
+Comment=WireGuard/OpenVPN Switch
+Icon=juggler
+Exec=juggler
+Type=Application
+Categories=Utility
+Terminal=false
