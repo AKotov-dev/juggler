@@ -78,7 +78,7 @@ toolversion=2.2.4
 [INFO]
 0=v0.3
 1=+ Cosmetic edits
-2=+ RPM Packages for Mageia-9
+2=+ RPM Packages for Mageia8/9
 3=
 4=v0.2
 5=+ Autorun on reboot
