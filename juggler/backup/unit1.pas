@@ -46,6 +46,7 @@ type
 
 var
   MainForm: TMainForm;
+  showmainform: boolean;
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
@@ -69,9 +70,15 @@ begin
     '[[ -n $(systemctl is-enabled juggler | grep "enabled") ]] && echo "yes"'], s);
 
   if Trim(s) = 'yes' then
-    Result := True
+  begin
+    Result := True;
+    // showmainform:=false;
+  end
   else
+  begin
     Result := False;
+    //  showmainform:=false;
+  end;
 end;
 
 //Стоп
@@ -80,9 +87,6 @@ var
   s: ansistring;
 begin
   LogMemo.Append(SStopResetVPN);
-
- { RunCommand('/bin/bash', ['-c', 'systemctl stop ' + VPNService1.Text +
-    ' ' + VPNService2.Text + '; kill -9 $(cat /etc/juggler/pid) &'], s);}
   Application.ProcessMessages;
 
   if FileExists('/etc/juggler/juggler.sh') then
@@ -223,8 +227,10 @@ begin
   else
     ClearBox.Checked := False;
 
-  //Проверка AutoStart
- // AutoStartBox.Checked := CheckAutoStart;
+  //Проверка AutoStart + флаг проверки AutoStartBox
+  showmainform := True;
+  AutoStartBox.Checked := CheckAutoStart;
+  showmainform := False;
 
   RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], S);
@@ -257,16 +263,22 @@ procedure TMainForm.AutostartBoxChange(Sender: TObject);
 var
   s: ansistring;
 begin
-  Screen.Cursor := crHourGlass;
-  Application.ProcessMessages;
+  if not showmainform then
+  begin
+    Screen.Cursor := crHourGlass;
+    Application.ProcessMessages;
 
-  if AutoStartBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'systemctl enable juggler'], s)
+    if AutoStartBox.Checked then
+      RunCommand('/bin/bash', ['-c', 'systemctl enable juggler'], s)
+    else
+      RunCommand('/bin/bash', ['-c', 'systemctl disable juggler'], s);
+
+    AutoStartBox.Checked := CheckAutoStart;
+
+    Screen.Cursor := crDefault;
+  end
   else
-    RunCommand('/bin/bash', ['-c', 'systemctl disable juggler'], s);
-
-  AutoStartBox.Checked := CheckAutoStart;
-  Screen.Cursor := crDefault;
+    showmainform := False;
 end;
 
 end.

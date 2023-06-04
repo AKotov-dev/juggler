@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 283
+  Left = 280
   Height = 368
-  Top = 126
+  Top = 125
   Width = 612
   Caption = 'juggler'
   ClientHeight = 368

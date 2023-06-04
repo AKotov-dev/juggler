@@ -46,6 +46,7 @@ type
 
 var
   MainForm: TMainForm;
+  showmainform: boolean;
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
@@ -220,8 +221,10 @@ begin
   else
     ClearBox.Checked := False;
 
-  //Проверка AutoStart
+  //Проверка AutoStart + флаг проверки AutoStartBox
+  showmainform := True;
   AutoStartBox.Checked := CheckAutoStart;
+  showmainform := False;
 
   RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], S);
@@ -254,16 +257,22 @@ procedure TMainForm.AutostartBoxChange(Sender: TObject);
 var
   s: ansistring;
 begin
-  Screen.Cursor := crHourGlass;
-  Application.ProcessMessages;
+  if not showmainform then
+  begin
+    Screen.Cursor := crHourGlass;
+    Application.ProcessMessages;
 
-  if AutoStartBox.Checked then
-    RunCommand('/bin/bash', ['-c', 'systemctl enable juggler'], s)
+    if AutoStartBox.Checked then
+      RunCommand('/bin/bash', ['-c', 'systemctl enable juggler'], s)
+    else
+      RunCommand('/bin/bash', ['-c', 'systemctl disable juggler'], s);
+
+    AutoStartBox.Checked := CheckAutoStart;
+
+    Screen.Cursor := crDefault;
+  end
   else
-    RunCommand('/bin/bash', ['-c', 'systemctl disable juggler'], s);
-
-  AutoStartBox.Checked := CheckAutoStart;
-  Screen.Cursor := crDefault;
+    showmainform := False;
 end;
 
 end.
