@@ -46,7 +46,7 @@ type
 
 var
   MainForm: TMainForm;
-  showmainform: boolean;
+  showmainform: boolean; //Флаг первого запуска формы (Show)
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';

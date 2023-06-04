@@ -61,24 +61,12 @@ begin
     end;
 end;
 
-//Отображение статуса
+//Отображение статуса - Светодиоды
 procedure LEDStatus.ShowStatus;
 begin
   with MainForm do
   begin
-  {  //Состояние панели и кнопки "Старт"
-    if (ResultStr[0] = 'yes') or (ResultStr[1] = 'yes') then
-    begin
-      RadioGroup1.Enabled := False;
-      StartBtn.Enabled := False;
-    end
-    else
-    begin
-      RadioGroup1.Enabled := True;
-      StartBtn.Enabled := True;
-    end;
-   }
-    //Светодиоды
+
     if ResultStr[0] = 'yes' then
       Shape1.Brush.Color := clLime
     else

@@ -70,15 +70,9 @@ begin
     '[[ -n $(systemctl is-enabled juggler | grep "enabled") ]] && echo "yes"'], s);
 
   if Trim(s) = 'yes' then
-  begin
-    Result := True;
-    // showmainform:=false;
-  end
+    Result := True
   else
-  begin
     Result := False;
-    //  showmainform:=false;
-  end;
 end;
 
 //Стоп
