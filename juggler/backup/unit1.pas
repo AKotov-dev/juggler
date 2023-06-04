@@ -55,7 +55,7 @@ resourcestring
 
 implementation
 
-uses start_trd;
+uses start_trd, status_trd;
 
 {$R *.lfm}
 
@@ -98,11 +98,11 @@ procedure TMainForm.Timer1Timer(Sender: TObject);
 var
   s: ansistring;
 begin
-  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface1.Text +
+{  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface1.Text +
     ') ]] && echo "yes"'], s);
   if Trim(s) = 'yes' then Shape1.Brush.Color := clLime
   else
-    Shape1.Brush.Color := clYellow;
+    Shape1.Brush.Color := clYellow;}
 
   RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface2.Text +
     ') ]] && echo "yes"'], s);
@@ -150,6 +150,8 @@ begin
       VPN2 := Trim(VPNService1.Text);
       IF2 := Trim(Interface1.Text);
     end;
+
+    if (VPN1 = '') or (IF1 = '') or (VPN2 = '') or (IF2 = '') then Exit;
 
     //Создаём /etc/juggler/juggler.sh
     D.Add('#!/bin/bash');
@@ -227,6 +229,7 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 var
   s: ansistring;
+  FLEDStatusThread: TThread;
 begin
   IniPropStorage1.Restore;
   Caption := Application.Title;
@@ -242,13 +245,17 @@ begin
   //Проверка AutoStart
   AutoStartBox.Checked := CheckAutoStart;
 
-  RunCommand('/bin/bash', ['-c',
+ { RunCommand('/bin/bash', ['-c',
     '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
   if Trim(s) = 'yes' then
   begin
     RadioGroup1.Enabled := False;
     StartBtn.Enabled := False;
-  end;
+  end;}
+
+    //Запуск потока проверки состояния локального порта
+  FLEDStatusThread := LEDStatus.Create(False);
+  FLEDStatusThread.Priority := tpNormal;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);

@@ -55,7 +55,7 @@ resourcestring
 
 implementation
 
-uses start_trd;
+uses start_trd, status_trd;
 
 {$R *.lfm}
 
@@ -98,11 +98,11 @@ procedure TMainForm.Timer1Timer(Sender: TObject);
 var
   s: ansistring;
 begin
-  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface1.Text +
+{  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface1.Text +
     ') ]] && echo "yes"'], s);
   if Trim(s) = 'yes' then Shape1.Brush.Color := clLime
   else
-    Shape1.Brush.Color := clYellow;
+    Shape1.Brush.Color := clYellow;}
 
   RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface2.Text +
     ') ]] && echo "yes"'], s);
@@ -229,6 +229,7 @@ end;
 procedure TMainForm.FormShow(Sender: TObject);
 var
   s: ansistring;
+  FLEDStatusThread: TThread;
 begin
   IniPropStorage1.Restore;
   Caption := Application.Title;
@@ -251,6 +252,10 @@ begin
     RadioGroup1.Enabled := False;
     StartBtn.Enabled := False;
   end;
+
+    //Запуск потока проверки состояния локального порта
+  FLEDStatusThread := LEDStatus.Create(False);
+  FLEDStatusThread.Priority := tpNormal;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);

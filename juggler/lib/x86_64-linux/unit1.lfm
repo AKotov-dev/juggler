@@ -247,6 +247,7 @@ object MainForm: TMainForm
     TabOrder = 4
   end
   object Timer1: TTimer
+    Enabled = False
     OnTimer = Timer1Timer
     Left = 128
     Top = 192
