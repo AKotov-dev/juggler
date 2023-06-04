@@ -108,8 +108,8 @@ end;
 
 procedure TMainForm.StartBtnClick(Sender: TObject);
 var
-  D: TStringList;
   s: ansistring;
+  D: TStringList;
   FStart: TThread;
   VPN1, IF1, VPN2, IF2: string;
 begin
@@ -209,6 +209,7 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 var
+  S: ansistring;
   FLEDStatusThread: TThread;
 begin
   IniPropStorage1.Restore;
@@ -223,7 +224,15 @@ begin
     ClearBox.Checked := False;
 
   //Проверка AutoStart
-  AutoStartBox.Checked := CheckAutoStart;
+ // AutoStartBox.Checked := CheckAutoStart;
+
+  RunCommand('/bin/bash', ['-c',
+    '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], S);
+  if Trim(S) = 'yes' then
+  begin
+    RadioGroup1.Enabled := False;
+    StartBtn.Enabled := False;
+  end;
 
   //Запуск потока проверки состояния локального порта
   FLEDStatusThread := LEDStatus.Create(False);

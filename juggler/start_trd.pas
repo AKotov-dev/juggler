@@ -78,9 +78,9 @@ procedure Start.StartProcess;
 begin
   with MainForm do
   begin
- {  RadioGroup1.Enabled := False;
-    StartBtn.Enabled := False;
- }
+   RadioGroup1.Enabled := False;
+   StartBtn.Enabled := False;
+
     //Очищаем лог
     LogMemo.Clear;
     LogMemo.Append(SStartVPN);

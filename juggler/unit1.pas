@@ -80,9 +80,6 @@ var
   s: ansistring;
 begin
   LogMemo.Append(SStopResetVPN);
-
- { RunCommand('/bin/bash', ['-c', 'systemctl stop ' + VPNService1.Text +
-    ' ' + VPNService2.Text + '; kill -9 $(cat /etc/juggler/pid) &'], s);}
   Application.ProcessMessages;
 
   if FileExists('/etc/juggler/juggler.sh') then
@@ -209,6 +206,7 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 var
+  S: ansistring;
   FLEDStatusThread: TThread;
 begin
   IniPropStorage1.Restore;
@@ -224,6 +222,14 @@ begin
 
   //Проверка AutoStart
   AutoStartBox.Checked := CheckAutoStart;
+
+  RunCommand('/bin/bash', ['-c',
+    '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], S);
+  if Trim(S) = 'yes' then
+  begin
+    RadioGroup1.Enabled := False;
+    StartBtn.Enabled := False;
+  end;
 
   //Запуск потока проверки состояния локального порта
   FLEDStatusThread := LEDStatus.Create(False);
