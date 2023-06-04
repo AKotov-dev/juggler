@@ -90,6 +90,7 @@ begin
     RunCommand('/bin/bash', ['-c', '/etc/juggler/juggler.sh stop'], s);
 
   RadioGroup1.Enabled := True;
+  StartBtn.Enabled := True;
 end;
 
 //Индикация состояния интерфейсов
@@ -129,87 +130,82 @@ var
   D: TStringList;
   s: ansistring;
   FStart: TThread;
+  VPN1, IF1, VPN2, IF2: string;
 begin
   try
     D := TStringList.Create;
 
-    //Переключить 1/2
+    //Реверс 1/2 или 2/1
     if RadioGroup1.ItemIndex = 0 then
     begin
-      D.Add('#!/bin/bash');
-      D.Add('');
-
-      //Start connection "$1 == start"
-      D.Add('if [ "$1" == "start" ]; then');
-      D.Add('echo $$ > /etc/juggler/pid');
-
-      //Стоп всех возможных сервисов
-      D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
-        VPNService1.Text + ' ' + VPNService2.Text + ' 2>/dev/null');
-      //Переходная пауза и рестарт первого подключения
-      D.Add('sleep 1; systemctl restart ' + VPNService1.Text);
-
-      //Количество попыток attempt
-      D.Add('attempt=8');
-      D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
-        Interface1.Text + ') ]]; do sleep 1');
-
-      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
-        VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
-
-      D.Add('sleep 1; systemctl restart ' + VPNService2.Text);
-
-      D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
-        Interface2.Text + ') ]]; do sleep 1');
-
-      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
-        VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
-
-      D.Add('systemctl stop ' + VPNService1.Text);
+      VPN1 := Trim(VPNService1.Text);
+      IF1 := Trim(Interface1.Text);
+      VPN2 := Trim(VPNService2.Text);
+      IF2 := Trim(Interface2.Text);
     end
     else
     begin
-      //Переключить 2/1
-      D.Add('#!/bin/bash');
-      D.Add('');
-
-      //Start connection "$1 == start"
-      D.Add('if [ "$1" == "start" ]; then');
-      D.Add('echo $$ > /etc/juggler/pid');
-      //Стоп всех возможных сервисов
-      D.Add('systemctl stop ' + VPNService1.Text + ' ' + VPNService2.Text);
-      //Переходная пауза и рестарт первого подключения
-      D.Add('sleep 1; systemctl restart ' + VPNService2.Text);
-
-      //Количество попыток attempt
-      D.Add('attempt=8');
-      D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
-        Interface2.Text + ') ]]; do sleep 1');
-
-      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
-        VPNService2.Text + ' ' + VPNService1.Text + '; exit 1; else echo "' +
-        Interface2.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
-
-      D.Add('systemctl restart ' + VPNService1.Text);
-
-      D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
-        Interface1.Text + ') ]]; do sleep 1');
-
-      D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
-        VPNService1.Text + ' ' + VPNService2.Text + '; exit 1; else echo "' +
-        Interface1.Text + ' -> attempt ${i} of ${attempt}"; fi; done');
-
-      D.Add('systemctl stop ' + VPNService2.Text);
+      VPN1 := Trim(VPNService2.Text);
+      IF1 := Trim(Interface2.Text);
+      VPN2 := Trim(VPNService1.Text);
+      IF2 := Trim(Interface1.Text);
     end;
+
+    //Создаём /etc/juggler/juggler.sh
+    D.Add('#!/bin/bash');
+    D.Add('');
+
+    //Start connection "$1 == start"
+    D.Add('if [ "$1" == "start" ]; then');
+    //PID
+    D.Add('echo $$ > /etc/juggler/pid');
+
+    //Стоп всех возможных сервисов
+    D.Add('#Stop all VPN connections');
+    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
+      VPN1 + ' ' + VPN2 + ' 2>/dev/null');
+    D.Add('wg-quick down /etc/luntikwg/wg0.conf  2>/dev/null');
+
+    //Рестарт первого подключения
+    D.Add('#Restart of the first VPN');
+    D.Add('systemctl restart ' + VPN1);
+
+    //Количество попыток attempt
+    D.Add('attempt=8');
+    D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
+      IF1 + ') ]]; do sleep 1');
+
+    D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
+      VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
+      ' -> attempt ${i} of ${attempt}"; fi; done');
+
+    //Рестарт второго подключения
+    D.Add('#Restart of the second VPN');
+    D.Add('systemctl restart ' + VPN2);
+
+    D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
+      IF2 + ') ]]; do sleep 1');
+
+    D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
+      VPN2 + ' ' + VPN1 + '; exit 1; else echo "' + IF2 +
+      ' -> attempt ${i} of ${attempt}"; fi; done');
+
+    D.Add('systemctl stop ' + VPN1);
+    // D.Add('echo -e "# This file was created by Juggler\n\nnameserver 1.1.1.1\nnameserver 9.9.9.9" > /etc/resolv.conf');
 
     D.Add('   else');
 
-    //Stop connection "$1 == stop"
+    D.Add('#Stop connection');
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
-      VPNService1.Text + ' ' + VPNService2.Text +
-      ' 2>/dev/null; kill -9 $(cat /etc/juggler/pid)');
+      VPN1 + ' ' + VPN2 + ' 2>/dev/null');
+    D.Add('kill -9 $(cat /etc/juggler/pid); wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
+
+    D.Add('#DNS restore');
+    D.Add('if [[ $(systemctl is-active systemd-resolved) == "active" ]]; then');
+    D.Add('systemctl restart systemd-resolved');
+    D.Add('   else');
+    D.Add('pgrep NetworkManager && systemctl restart NetworkManager.service || resolvconf -u');
+    D.Add('fi');
 
     D.Add('fi');
 
