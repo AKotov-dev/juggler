@@ -160,11 +160,11 @@ begin
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
-    //Рестарт второго подключения
+    //Рестарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
     D.Add('#Restart of the second VPN');
     D.Add('systemctl restart ' + VPN2);
 
-    D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
+    D.Add('i=0; until [[ $(fping ya.ru) && $(ip -br a | grep ' +
       IF2 + ') ]]; do sleep 1');
 
     D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +

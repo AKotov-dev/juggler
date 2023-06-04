@@ -46,7 +46,7 @@ type
 
 var
   MainForm: TMainForm;
-  showmainform: boolean;
+  showmainform: boolean; //Флаг первого запуска формы (Show)
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
@@ -164,7 +164,7 @@ begin
     D.Add('#Restart of the second VPN');
     D.Add('systemctl restart ' + VPN2);
 
-    D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
+    D.Add('i=0; until [[ $(fping ya.ru) && $(ip -br a | grep ' +
       IF2 + ') ]]; do sleep 1');
 
     D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
