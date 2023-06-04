@@ -78,7 +78,7 @@ toolversion=2.2.4
 [INFO]
 0=v0.4
 1=+ Improved switching algorithm
-2=+ Status of LEDs in a separate stream
+2=+ Status of LEDs in a separate thread
 3=+ RPM Packages for Mageia8/9
 4=
 5=v0.3

@@ -248,7 +248,6 @@ object MainForm: TMainForm
   end
   object Timer1: TTimer
     Enabled = False
-    OnTimer = Timer1Timer
     Left = 128
     Top = 192
   end

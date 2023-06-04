@@ -36,7 +36,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure StopBtnClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
     procedure VPNService1Change(Sender: TObject);
     procedure VPNService2Change(Sender: TObject);
   private
@@ -93,24 +92,6 @@ begin
   StartBtn.Enabled := True;
 end;
 
-//Индикация состояния интерфейсов
-procedure TMainForm.Timer1Timer(Sender: TObject);
-var
-  s: ansistring;
-begin
-{  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface1.Text +
-    ') ]] && echo "yes"'], s);
-  if Trim(s) = 'yes' then Shape1.Brush.Color := clLime
-  else
-    Shape1.Brush.Color := clYellow;}
-
-  RunCommand('/bin/bash', ['-c', '[[ $(ip -br a | grep ' + Interface2.Text +
-    ') ]] && echo "yes"'], s);
-  if Trim(s) = 'yes' then Shape2.Brush.Color := clLime
-  else
-    Shape2.Brush.Color := clYellow;
-end;
-
 procedure TMainForm.VPNService1Change(Sender: TObject);
 begin
   if VPNService1.ItemIndex <> 1 then Interface1.Text := 'tun0'
@@ -127,8 +108,8 @@ end;
 
 procedure TMainForm.StartBtnClick(Sender: TObject);
 var
-  D: TStringList;
   s: ansistring;
+  D: TStringList;
   FStart: TThread;
   VPN1, IF1, VPN2, IF2: string;
 begin
@@ -228,7 +209,6 @@ end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 var
-  s: ansistring;
   FLEDStatusThread: TThread;
 begin
   IniPropStorage1.Restore;
@@ -245,15 +225,7 @@ begin
   //Проверка AutoStart
   AutoStartBox.Checked := CheckAutoStart;
 
-  RunCommand('/bin/bash', ['-c',
-    '[[ $(ip -br a | grep -E "wg0|tun0") ]] && echo "yes"'], s);
-  if Trim(s) = 'yes' then
-  begin
-    RadioGroup1.Enabled := False;
-    StartBtn.Enabled := False;
-  end;
-
-    //Запуск потока проверки состояния локального порта
+  //Запуск потока проверки состояния локального порта
   FLEDStatusThread := LEDStatus.Create(False);
   FLEDStatusThread.Priority := tpNormal;
 end;
