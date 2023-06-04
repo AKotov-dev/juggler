@@ -151,6 +151,8 @@ begin
       IF2 := Trim(Interface1.Text);
     end;
 
+    if (VPN1 = '') or (IF1 = '') or (VPN2 = '') or (IF2 = '') then Exit;
+
     //Создаём /etc/juggler/juggler.sh
     D.Add('#!/bin/bash');
     D.Add('');

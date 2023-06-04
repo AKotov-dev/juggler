@@ -157,7 +157,7 @@ begin
 
     //Start connection "$1 == start"
     D.Add('if [ "$1" == "start" ]; then');
-    //PID
+    D.Add('#PID');
     D.Add('echo $$ > /etc/juggler/pid');
 
     //Стоп всех возможных сервисов
