@@ -14,7 +14,7 @@ msgstr ""
 
 #: tmainform.autostartbox.caption
 msgid "AutoStart"
-msgstr "Автостарт"
+msgstr "АвтоСтарт"
 
 #: tmainform.caption
 msgid "juggler"
