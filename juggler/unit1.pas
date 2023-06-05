@@ -50,7 +50,7 @@ var
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
-  SStopResetVPN = 'Stop/Reset the connection, wait...';
+  SStopResetVPN = 'Stop/Reset the connection...';
   SCycleCompleted = 'The cycle is completed';
 
 implementation
