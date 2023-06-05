@@ -172,7 +172,7 @@ begin
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
     D.Add('systemctl stop ' + VPN1 + '; sleep 1');
-    D.Add('echo "DNS replacement after disconnection "' + VPN1);
+    D.Add('echo "Replacing DNS after disconnecting "' + VPN1);
     D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.1.1.1" > /etc/resolv.conf');
 
     D.Add('   else');
