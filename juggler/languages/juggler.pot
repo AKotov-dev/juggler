@@ -71,6 +71,6 @@ msgid "Connection attempt, wait..."
 msgstr ""
 
 #: unit1.sstopresetvpn
-msgid "Stop/Reset the connection"
+msgid "Stop/Reset the connection, wait..."
 msgstr ""
 

@@ -50,7 +50,7 @@ var
 
 resourcestring
   SStartVPN = 'Connection attempt, wait...';
-  SStopResetVPN = 'Stop/Reset the connection';
+  SStopResetVPN = 'Stop/Reset the connection, wait...';
   SCycleCompleted = 'The cycle is completed';
 
 implementation
@@ -148,24 +148,24 @@ begin
     D.Add('wg-quick down /etc/luntikwg/wg0.conf  2>/dev/null');
 
     //Рестарт первого подключения
-    D.Add('echo "Restart of the ' + VPN1 + '.service"');
+    D.Add('echo "Restart of the ' + VPN1 + '.service and ping, wait..."');
     D.Add('systemctl restart ' + VPN1);
 
     //Количество попыток attempt
     D.Add('attempt=8');
-    D.Add('i=0; until [[ $(fping google.com) && $(ip -br a | grep ' +
-      IF1 + ') ]]; do sleep 1');
+    D.Add('i=0; until [[ $(ip -br a | grep ' +
+      IF1 + ') && $(fping google.com) ]]; do sleep 1');
 
     D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
     //Рестарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
-    D.Add('echo "Restart of the ' + VPN2 + '.service"');
+    D.Add('echo "Restart of the ' + VPN2 + '.service and ping, wait..."');
     D.Add('systemctl restart ' + VPN2);
 
-    D.Add('i=0; until [[ $(fping ya.ru) && $(ip -br a | grep ' +
-      IF2 + ') ]]; do sleep 1');
+    D.Add('i=0; until [[ $(ip -br a | grep ' +
+      IF2 + ') && $(fping ya.ru) ]]; do sleep 1');
 
     D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
       VPN2 + ' ' + VPN1 + '; exit 1; else echo "' + IF2 +
