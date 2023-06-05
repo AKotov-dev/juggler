@@ -160,7 +160,7 @@ begin
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
-    //Рестарт второго подключения
+    //Рестарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
     D.Add('#Restart of the second VPN');
     D.Add('systemctl restart ' + VPN2);
 
@@ -171,8 +171,9 @@ begin
       VPN2 + ' ' + VPN1 + '; exit 1; else echo "' + IF2 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
-    D.Add('systemctl stop ' + VPN1);
-    // D.Add('echo -e "# This file was created by Juggler\n\nnameserver 1.1.1.1\nnameserver 9.9.9.9" > /etc/resolv.conf');
+    D.Add('systemctl stop ' + VPN1 + '; sleep 1');
+    D.Add('echo "DNS replacement after disconnection "' + VPN1);
+    D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.1.1.1" > /etc/resolv.conf');
 
     D.Add('   else');
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: tmainform.autostartbox.caption
-msgid "AutoStart"
+msgid "AutoStart (experimental)"
 msgstr ""
 
 #: tmainform.caption

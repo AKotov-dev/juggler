@@ -2,7 +2,7 @@
 name=juggler
 
 [VERSION]
-version=0.4
+version=0.5
 
 [RELEASE]
 release=0.mrx9
@@ -76,18 +76,22 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.4
-1=+ Improved switching algorithm
-2=+ Status of LEDs in a separate thread
-3=+ RPM Packages for Mageia8/9
-4=
-5=v0.3
-6=+ Cosmetic edits
+0=v0.5
+1=+ Replacing DNS after disconnecting VPN1
+2=+ RPM Packages for Mageia8/9
+3=
+4=v0.4
+5=+ Improved switching algorithm
+6=+ Status of LEDs in a separate thread
 7=+ RPM Packages for Mageia8/9
 8=
-9=v0.2
-10=+ Autorun on reboot
-11=+ RPM Packages for Mageia-9
+9=v0.3
+10=+ Cosmetic edits
+11=+ RPM Packages for Mageia8/9
 12=
-13=v0.1
-14=+ Initial release
+13=v0.2
+14=+ Autorun on reboot
+15=+ RPM Packages for Mageia-9
+16=
+17=v0.1
+18=+ Initial release
