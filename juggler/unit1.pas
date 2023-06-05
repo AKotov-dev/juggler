@@ -148,7 +148,7 @@ begin
     D.Add('wg-quick down /etc/luntikwg/wg0.conf  2>/dev/null');
 
     //Рестарт первого подключения
-    D.Add('echo "Restart of the first VPN"');
+    D.Add('echo "Restart of the ' + VPN1 + '.service..."');
     D.Add('systemctl restart ' + VPN1);
 
     //Количество попыток attempt
@@ -161,7 +161,7 @@ begin
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
     //Рестарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
-    D.Add('echo "Restart of the second VPN"');
+    D.Add('echo "Restart of the ' + VPN2 + '.service..."');
     D.Add('systemctl restart ' + VPN2);
 
     D.Add('i=0; until [[ $(fping ya.ru) && $(ip -br a | grep ' +
@@ -172,8 +172,8 @@ begin
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
     D.Add('systemctl stop ' + VPN1 + '; sleep 1');
-    D.Add('echo "Replacing DNS after disconnecting "' + VPN1);
-    D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.1.1.1" > /etc/resolv.conf');
+    D.Add('echo "Replacing DNS after disconnecting "' + VPN1 + '.service');
+    D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.0.0.1" > /etc/resolv.conf');
 
     D.Add('   else');
 
