@@ -84,6 +84,11 @@ var
   s: ansistring;
 begin
   LogMemo.Append(SStopResetVPN);
+
+  //Промотать список вниз
+  LogMemo.SelStart := Length(MainForm.LogMemo.Text);
+  LogMemo.SelLength := 0;
+
   Application.ProcessMessages;
 
   if FileExists('/etc/juggler/juggler.sh') then
@@ -148,7 +153,7 @@ begin
     D.Add('#Stop all VPN connections');
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
       VPN1 + ' ' + VPN2 + ' 2>/dev/null');
-    D.Add('wg-quick down /etc/luntikwg/wg0.conf  2>/dev/null');
+    D.Add('wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
 
     //Рестарт первого подключения
     D.Add('echo "Restart of the ' + VPN1 + '.service and ping, wait..."');
