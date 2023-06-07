@@ -2,7 +2,7 @@
 name=juggler
 
 [VERSION]
-version=0.5
+version=0.6
 
 [RELEASE]
 release=0.mrx9
@@ -76,23 +76,28 @@ devtool=Lazarus
 toolversion=2.2.4
 
 [INFO]
-0=v0.5
-1=+ Added procps-ng rpm-dependency
-2=+ Replacing DNS after disconnecting VPN1
+0=v0.6
+1=+ Added an information pinger
+2=+ Improved work with DNS when switching
 3=+ RPM Packages for Mageia-8/9
 4=
-5=v0.4
-6=+ Improved switching algorithm
-7=+ Status of LEDs in a separate thread
+5=v0.5
+6=+ Added procps-ng rpm-dependency
+7=+ Replacing DNS after disconnecting VPN1
 8=+ RPM Packages for Mageia-8/9
 9=
-10=v0.3
-11=+ Cosmetic edits
-12=+ RPM Packages for Mageia-8/9
-13=
-14=v0.2
-15=+ Autorun on reboot
-16=+ RPM Packages for Mageia-9
-17=
-18=v0.1
-19=+ Initial release
+10=v0.4
+11=+ Improved switching algorithm
+12=+ Status of LEDs in a separate thread
+13=+ RPM Packages for Mageia-8/9
+14=
+15=v0.3
+16=+ Cosmetic edits
+17=+ RPM Packages for Mageia-8/9
+18=
+19=v0.2
+20=+ Autorun on reboot
+21=+ RPM Packages for Mageia-9
+22=
+23=v0.1
+24=+ Initial release

@@ -15,6 +15,7 @@ type
   TMainForm = class(TForm)
     AutostartBox: TCheckBox;
     ClearBox: TCheckBox;
+    PingMemo: TMemo;
     VPNService1: TComboBox;
     IniPropStorage1: TIniPropStorage;
     Interface1: TEdit;
@@ -33,6 +34,7 @@ type
     procedure AutostartBoxChange(Sender: TObject);
     procedure ClearBoxClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure StopBtnClick(Sender: TObject);
@@ -52,10 +54,11 @@ resourcestring
   SStartVPN = 'Connection attempt, wait...';
   SStopResetVPN = 'Stop/Reset the connection...';
   SCycleCompleted = 'The cycle is completed';
+  STryGoToSite = '- try to go to some website...';
 
 implementation
 
-uses start_trd, status_trd;
+uses start_trd, status_trd, ping_trd;
 
 {$R *.lfm}
 
@@ -81,6 +84,11 @@ var
   s: ansistring;
 begin
   LogMemo.Append(SStopResetVPN);
+
+  //Промотать список вниз
+  LogMemo.SelStart := Length(MainForm.LogMemo.Text);
+  LogMemo.SelLength := 0;
+
   Application.ProcessMessages;
 
   if FileExists('/etc/juggler/juggler.sh') then
@@ -173,7 +181,8 @@ begin
 
     D.Add('systemctl stop ' + VPN1 + '; sleep 1');
     D.Add('echo "Replacing DNS after disconnecting "' + VPN1 + '.service');
-    D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.0.0.1" > /etc/resolv.conf');
+    D.Add('echo -e "# This file was created by Juggler\n\nnameserver 9.9.9.9\nnameserver 1.0.0.1" > '
+      + '/etc/resolv.conf 2>/dev/null');
 
     D.Add('   else');
 
@@ -210,6 +219,7 @@ procedure TMainForm.FormShow(Sender: TObject);
 var
   S: ansistring;
   FLEDStatusThread: TThread;
+  FCheckPingThread: TThread;
 begin
   IniPropStorage1.Restore;
   Caption := Application.Title;
@@ -238,12 +248,22 @@ begin
   //Запуск потока проверки состояния локального порта
   FLEDStatusThread := LEDStatus.Create(False);
   FLEDStatusThread.Priority := tpNormal;
+
+  //Поток проверки состояния
+  FCheckPingThread := CheckPing.Create(False);
+  FCheckPingThread.Priority := tpNormal;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
+
 begin
   if not DirectoryExists('/etc/juggler') then MkDir('/etc/juggler');
   IniPropStorage1.IniFileName := '/etc/juggler/juggler.conf';
+end;
+
+procedure TMainForm.FormResize(Sender: TObject);
+begin
+  PingMemo.Height := LogMemo.Height div 2;
 end;
 
 procedure TMainForm.ClearBoxClick(Sender: TObject);

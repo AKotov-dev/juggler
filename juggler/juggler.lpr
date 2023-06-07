@@ -11,13 +11,13 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
-  start_trd, status_trd { you can add units after this };
+  start_trd, status_trd, ping_trd { you can add units after this };
 
 {$R *.res}
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title:='Juggler v0.5';
+  Application.Title:='Juggler v0.6';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

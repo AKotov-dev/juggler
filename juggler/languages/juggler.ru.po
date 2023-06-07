@@ -84,3 +84,7 @@ msgstr "Попытка подключения, ждите..."
 #: unit1.sstopresetvpn
 msgid "Stop/Reset the connection..."
 msgstr "Стоп/Сброс подключения..."
+
+#: unit1.strygotosite
+msgid "- try to go to some website..."
+msgstr "- пробуйте зайти на любой сайт..."
