@@ -1,7 +1,6 @@
 [Desktop Entry]
-Name=Juggler (VPN Switch)
+Name=Juggler
 Comment=WireGuard/OpenVPN Switch
-Comment[ru]=Переключатель WireGuard/OpenVPN
 Icon=juggler
 Exec=juggler
 Type=Application
