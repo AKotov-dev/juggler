@@ -179,7 +179,7 @@ begin
       D.Add('echo "Deleting a route 0.0.0.0, if any..."');
       //Задержка до появления Peer (WireGuard)
       D.Add('sleep 1');
-      D.Add('ip route del $(ip r | grep "0.0.0.0")');
+      D.Add('ip route del $(ip r | grep "0.0.0.0" | head -n1)');
       D.Add('');
     end;
 

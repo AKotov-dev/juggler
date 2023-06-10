@@ -175,11 +175,12 @@ begin
     //Убираем шлюз 0.0.0.0, если VPN1=OpenVPN, иначе WireGuard Keypar создан не будет
     if IF1 = 'tun0' then
     begin
-      D.Add('echo "Deleting a route 0.0.0.0, if any..."');
       D.Add('');
+      D.Add('echo "Deleting a route 0.0.0.0, if any..."');
       //Задержка до появления Peer (WireGuard)
       D.Add('sleep 1');
       D.Add('ip route del $(ip r | grep "0.0.0.0")');
+      D.Add('');
     end;
 
     D.Add('i=0; until [[ $(ip -br a | grep ' + IF2 +
