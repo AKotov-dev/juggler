@@ -155,7 +155,7 @@ begin
       VPN1 + ' ' + VPN2 + ' 2>/dev/null');
     D.Add('wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
 
-    //Рестарт первого подключения
+    //Старт первого подключения
     D.Add('echo "Start of the ' + VPN1 + '.service and ping, wait..."');
     D.Add('systemctl start ' + VPN1);
 
@@ -168,9 +168,20 @@ begin
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
-    //Рестарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
+    //Старт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
     D.Add('echo "Start of the ' + VPN2 + '.service and ping, wait..."');
     D.Add('systemctl start ' + VPN2);
+
+    //Убираем шлюз 0.0.0.0, если VPN1=OpenVPN, иначе WireGuard Keypar создан не будет
+    if IF1 = 'tun0' then
+    begin
+      D.Add('');
+      D.Add('echo "Deleting a route 0.0.0.0, if any..."');
+      //Задержка до появления Peer (WireGuard)
+      D.Add('sleep 1');
+      D.Add('ip route del $(ip r | grep "0.0.0.0")');
+      D.Add('');
+    end;
 
     D.Add('i=0; until [[ $(ip -br a | grep ' + IF2 +
       ') && $(fping ya.ru) ]]; do sleep 1');
