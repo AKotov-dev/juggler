@@ -149,18 +149,19 @@ begin
     D.Add('#PID');
     D.Add('echo $$ > /etc/juggler/pid');
 
-    //Стоп всех возможных сервисов
+    //Стоп всех возможных сервисов, включая Cloudflare (TM) WARP
     D.Add('#Stop all VPN connections');
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
       VPN1 + ' ' + VPN2 + ' 2>/dev/null');
     D.Add('wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
+    D.Add('warp-cli --accept-tos disconnect 2>/dev/null');
 
     //Рестарт первого подключения
     D.Add('echo "Start of the ' + VPN1 + '.service and ping, wait..."');
     D.Add('systemctl start ' + VPN1);
 
     //Количество попыток attempt
-    D.Add('attempt=8');
+    D.Add('attempt=10');
     D.Add('i=0; until [[ $(ip -br a | grep ' + IF1 +
       ') && $(fping google.com) ]]; do sleep 1');
 
@@ -187,8 +188,8 @@ begin
 
     D.Add('#Stop connection');
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
-      VPN1 + ' ' + VPN2 + ' 2>/dev/null');
-    D.Add('kill -9 $(cat /etc/juggler/pid); wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
+      VPN1 + ' ' + VPN2 + ' 2>/dev/null; wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
+    D.Add('warp-cli --accept-tos disconnect 2>/dev/null; kill -9 $(cat /etc/juggler/pid)');
 
     D.Add('#DNS restore');
     D.Add('if [[ $(systemctl is-active systemd-resolved) == "active" ]]; then');
