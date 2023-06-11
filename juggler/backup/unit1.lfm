@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 280
-  Height = 480
+  Height = 539
   Top = 125
   Width = 612
   Caption = 'juggler'
-  ClientHeight = 480
+  ClientHeight = 539
   ClientWidth = 612
   OnCreate = FormCreate
   OnResize = FormResize
@@ -16,7 +16,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = PingMemo
     Left = 0
-    Height = 194
+    Height = 253
     Top = 170
     Width = 612
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -206,7 +206,7 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 463
+    Top = 522
     Width = 612
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
@@ -255,7 +255,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = StaticText2
     Left = 0
     Height = 95
-    Top = 368
+    Top = 427
     Width = 612
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Top = 4
