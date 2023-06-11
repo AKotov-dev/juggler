@@ -161,7 +161,7 @@ begin
     D.Add('systemctl start ' + VPN1);
 
     //Количество попыток attempt
-    D.Add('attempt=8');
+    D.Add('attempt=10');
     D.Add('i=0; until [[ $(ip -br a | grep ' + IF1 +
       ') && $(fping google.com) ]]; do sleep 1');
 
