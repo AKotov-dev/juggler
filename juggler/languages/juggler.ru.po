@@ -14,7 +14,7 @@ msgstr ""
 
 #: tmainform.autostartbox.caption
 msgid "Autostart (exp)"
-msgstr "АвтоСтарт (exp)"
+msgstr "Автостарт (exp)"
 
 #: tmainform.caption
 msgid "juggler"
@@ -88,4 +88,3 @@ msgstr "Попытка подключения, ждите..."
 #: unit1.sstopresetvpn
 msgid "Stop/Reset the connection..."
 msgstr "Стоп/Сброс подключения..."
-
