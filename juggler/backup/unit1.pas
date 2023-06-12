@@ -185,10 +185,8 @@ begin
       D.Add('#Delete the route of the first VPN');
       D.Add('if [[ $(ip r | grep 0.0.0.0) ]]; then');
       D.Add('ip r flush $(ip r | grep "0.0.0.0") | head -n1');
-      D.Add('   elif');
-      D.Add('[[ $(ip r show table all | grep "default dev wg0") ]]; then');
-      D.Add('ip r flush default dev wg0 table 51820');
-      D.Add('fi');
+      D.Add('   else');
+      D.Add('[[ $(ip r show table all | grep "default dev wg0") ]] && ip r flush default dev wg0 table 51820');
       D.Add('fi');
     end;
 
