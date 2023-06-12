@@ -64,7 +64,7 @@ msgid "Stop"
 msgstr "Стоп"
 
 #: tmainform.vpndefbox.caption
-msgid "vpn2 - default route"
+msgid "VPN2 - default route"
 msgstr ""
 
 #: tmainform.vpnservice1.text
