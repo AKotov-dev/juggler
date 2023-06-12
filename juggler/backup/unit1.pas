@@ -177,6 +177,8 @@ begin
     D.Add('systemctl start ' + VPN2);
     //ROSA и другие, свободное изменение DNS
     D.Add('umount -l /etc/resolv.conf 2>/dev/null');
+    //Сносим OpenVPN default route, если WireGuard через OpenVPN
+    D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
 
     //Важная задержка для WireGuard! Иначе не успевает создать Keypar!
     D.Add('');
