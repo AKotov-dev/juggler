@@ -138,7 +138,7 @@ begin
       IF2 := Trim(Interface1.Text);
     end;
 
-    if (VPN1 = '') or (IF1 = '') or (VPN2 = '') or (IF2 = '') then Exit;
+    if (VPN1 = '') or (IF1 = '') or (VPN2 = '') or (IF2 = '') or (IF1 = IF2) then Exit;
 
     //Создаём /etc/juggler/juggler.sh
     D.Add('#!/bin/bash');
@@ -178,9 +178,9 @@ begin
     //ROSA и другие, свободное изменение DNS
     D.Add('umount -l /etc/resolv.conf 2>/dev/null');
     //Сносим OpenVPN default route, если WireGuard через OpenVPN
-    D.Add('');
-    D.Add('#Deleting OpenVPN default route if WireGuard via OpenVPN');
-    D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
+    //D.Add('');
+    //D.Add('#Deleting OpenVPN default route if WireGuard via OpenVPN');
+    //D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
 
     //Важная задержка для WireGuard! Иначе не успевает создать Keypar!
     D.Add('');
