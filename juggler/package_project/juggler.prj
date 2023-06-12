@@ -60,7 +60,7 @@ deb=0
 [BEFOREREMOVE]
 0=#Окончательное удаление
 1=if [ $1 -eq 0 ]; then
-2=test -d /etc/juggler && rm -rf /etc/juggler
+2=if [ -d /etc/juggler ]; then rm -rf /etc/juggler; fi
 3=fi
 
 [URL32]
