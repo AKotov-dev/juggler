@@ -2,10 +2,10 @@ object MainForm: TMainForm
   Left = 280
   Height = 550
   Top = 125
-  Width = 620
+  Width = 629
   Caption = 'juggler'
   ClientHeight = 550
-  ClientWidth = 620
+  ClientWidth = 629
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 264
     Top = 170
-    Width = 620
+    Width = 629
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
     ReadOnly = True
@@ -30,7 +30,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 522
+    Left = 531
     Height = 38
     Top = 8
     Width = 90
@@ -43,7 +43,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StartBtn
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 522
+    Left = 531
     Height = 38
     Top = 49
     Width = 90
@@ -57,7 +57,7 @@ object MainForm: TMainForm
     Left = 8
     Height = 120
     Top = 8
-    Width = 504
+    Width = 513
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
     BorderSpacing.Right = 10
@@ -70,7 +70,7 @@ object MainForm: TMainForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 102
-    ClientWidth = 502
+    ClientWidth = 511
     ItemIndex = 0
     Items.Strings = (
       '1/2'
@@ -81,7 +81,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface2
-      Left = 241
+      Left = 249
       Height = 17
       Top = 67
       Width = 134
@@ -94,7 +94,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface1
-      Left = 241
+      Left = 249
       Height = 17
       Top = 14
       Width = 134
@@ -109,7 +109,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape1
-      Left = 378
+      Left = 386
       Height = 37
       Top = 4
       Width = 80
@@ -124,7 +124,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface1
       AnchorSideTop.Side = asrCenter
-      Left = 463
+      Left = 471
       Height = 10
       Top = 17
       Width = 20
@@ -137,7 +137,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface2
       AnchorSideTop.Side = asrCenter
-      Left = 463
+      Left = 471
       Height = 10
       Top = 70
       Width = 20
@@ -150,7 +150,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape2
-      Left = 378
+      Left = 386
       Height = 37
       Top = 57
       Width = 80
@@ -167,7 +167,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 4
-      Width = 157
+      Width = 165
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -188,7 +188,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 57
-      Width = 157
+      Width = 165
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -207,7 +207,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 17
     Top = 533
-    Width = 620
+    Width = 629
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Color = clDefault
@@ -223,7 +223,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 411
+    Left = 420
     Height = 32
     Top = 133
     Width = 201
@@ -256,7 +256,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 95
     Top = 438
-    Width = 620
+    Width = 629
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Top = 4
     Font.Height = -13
@@ -269,11 +269,13 @@ object MainForm: TMainForm
   end
   object VPNDefBox: TCheckBox
     AnchorSideTop.Control = ClearBox
-    Left = 175
+    AnchorSideRight.Control = ClearBox
+    Left = 253
     Height = 32
     Top = 133
     Width = 157
-    Anchors = [akTop]
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 10
     Caption = 'VPN2 - default route'
     TabOrder = 6
   end

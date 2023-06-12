@@ -65,7 +65,7 @@ msgstr "Стоп"
 
 #: tmainform.vpndefbox.caption
 msgid "VPN2 - default route"
-msgstr ""
+msgstr "VPN2 - дефолтный маршрут"
 
 #: tmainform.vpnservice1.text
 msgctxt "tmainform.vpnservice1.text"
@@ -88,4 +88,3 @@ msgstr "Попытка подключения, ждите..."
 #: unit1.sstopresetvpn
 msgid "Stop/Reset the connection..."
 msgstr "Стоп/Сброс подключения..."
-
