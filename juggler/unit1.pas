@@ -55,7 +55,6 @@ resourcestring
   SStartVPN = 'Connection attempt, wait...';
   SStopResetVPN = 'Stop/Reset the connection...';
   SCycleCompleted = 'The cycle is completed';
-  STryGoToSite = '- try to go to some website...';
 
 implementation
 

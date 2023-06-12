@@ -13,21 +13,17 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: tmainform.autostartbox.caption
-#, fuzzy
-#| msgid "AutoStart (experimental)"
 msgid "Autostart (exp)"
-msgstr "АвтоСтарт (experimental)"
+msgstr "АвтоСтарт (exp)"
 
 #: tmainform.caption
 msgid "juggler"
 msgstr ""
 
 #: tmainform.clearbox.caption
-#, fuzzy
-#| msgid "Clear browser cache and cookies at GUI startup"
 msgctxt "tmainform.clearbox.caption"
 msgid "Clear cookies at GUI startup"
-msgstr "Очистить кеш браузера и cookies при старте GUI"
+msgstr "Очистить cookies при старте GUI"
 
 #: tmainform.interface1.text
 msgctxt "tmainform.interface1.text"
@@ -92,8 +88,4 @@ msgstr "Попытка подключения, ждите..."
 #: unit1.sstopresetvpn
 msgid "Stop/Reset the connection..."
 msgstr "Стоп/Сброс подключения..."
-
-#: unit1.strygotosite
-msgid "- try to go to some website..."
-msgstr "- пробуйте зайти на любой сайт..."
 

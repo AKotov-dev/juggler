@@ -78,7 +78,3 @@ msgstr ""
 msgid "Stop/Reset the connection..."
 msgstr ""
 
-#: unit1.strygotosite
-msgid "- try to go to some website..."
-msgstr ""
-

@@ -269,12 +269,12 @@ object MainForm: TMainForm
   end
   object VPNDefBox: TCheckBox
     AnchorSideTop.Control = ClearBox
-    Left = 192
+    Left = 179
     Height = 32
     Top = 133
-    Width = 154
+    Width = 181
     Anchors = [akTop]
-    Caption = '(-) vpn default route'
+    Caption = '(-) first vpn default route'
     TabOrder = 6
   end
   object Timer1: TTimer

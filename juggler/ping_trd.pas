@@ -63,10 +63,7 @@ begin
   begin
     //Вывод построчно
     for i := 0 to PingStr.Count - 1 do
-      if Pos('unreachable', PingStr[i]) <> 0 then
-        PingMemo.Append(PingStr[i] + ' ' + STryGoToSite)
-      else
-        PingMemo.Lines.Append(PingStr[i]);
+      PingMemo.Lines.Append(PingStr[i]);
 
     //Промотать список вниз
     PingMemo.SelStart := Length(PingMemo.Text);
