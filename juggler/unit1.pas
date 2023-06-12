@@ -14,6 +14,7 @@ type
 
   TMainForm = class(TForm)
     AutostartBox: TCheckBox;
+    VPNDefBox: TCheckBox;
     ClearBox: TCheckBox;
     PingMemo: TMemo;
     VPNService1: TComboBox;
@@ -178,13 +179,16 @@ begin
     //ROSA и другие, свободное изменение DNS
     D.Add('umount -l /etc/resolv.conf 2>/dev/null');
 
-    //Сносим OpenVPN default route, если WireGuard через OpenVPN
-    //D.Add('');
-    //D.Add('#Deleting OpenVPN default route if WireGuard via OpenVPN');
-    //D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
-    //Сносим WireGuard default route, если OpenVPN через WireGuard
-    //D.Add('#Deleting WireGuard default route if OpenVPN via WireGuard');
-    //D.Add('[[ $(ip r show table all | grep "default dev wg0") ]] && ip r flush default dev wg0 table 51820');
+    if VPNDefBox.Checked then
+    begin
+      D.Add('');
+      //Сносим OpenVPN default route, если WireGuard через OpenVPN
+      D.Add('#Deleting OpenVPN default route if WireGuard via OpenVPN');
+      D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
+      //Сносим WireGuard default route, если OpenVPN через WireGuard
+      D.Add('#Deleting WireGuard default route if OpenVPN via WireGuard');
+      D.Add('[[ $(ip r show table all | grep "default dev wg0") ]] && ip r flush default dev wg0 table 51820');
+    end;
 
     //Важная задержка для WireGuard! Иначе не успевает создать Keypar!
     D.Add('');

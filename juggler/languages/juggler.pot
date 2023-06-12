@@ -2,7 +2,7 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: tmainform.autostartbox.caption
-msgid "AutoStart (experimental)"
+msgid "Autostart (exp)"
 msgstr ""
 
 #: tmainform.caption
@@ -11,7 +11,7 @@ msgstr ""
 
 #: tmainform.clearbox.caption
 msgctxt "tmainform.clearbox.caption"
-msgid "Clear browser cache and cookies at GUI startup"
+msgid "Clear cookies at GUI startup"
 msgstr ""
 
 #: tmainform.interface1.text
@@ -50,6 +50,10 @@ msgstr ""
 #: tmainform.stopbtn.caption
 msgctxt "tmainform.stopbtn.caption"
 msgid "Stop"
+msgstr ""
+
+#: tmainform.vpndefbox.caption
+msgid "(-) first vpn default route"
 msgstr ""
 
 #: tmainform.vpnservice1.text

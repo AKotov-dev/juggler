@@ -2,14 +2,14 @@ object MainForm: TMainForm
   Left = 280
   Height = 539
   Top = 125
-  Width = 612
+  Width = 617
   Caption = 'juggler'
   ClientHeight = 539
-  ClientWidth = 612
+  ClientWidth = 617
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
-  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;LogMemo.Lines;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width'
+  SessionProperties = 'Height;Interface1.Text;Interface2.Text;Left;LogMemo.Lines;RadioGroup1.ItemIndex;Top;VPNService1.Text;VPNService2.Text;Width;VPNDefBox.Checked'
   LCLVersion = '2.2.4.0'
   object LogMemo: TMemo
     AnchorSideTop.Control = ClearBox
@@ -18,7 +18,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 253
     Top = 170
-    Width = 612
+    Width = 617
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
     ReadOnly = True
@@ -30,7 +30,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 514
+    Left = 519
     Height = 38
     Top = 8
     Width = 90
@@ -43,7 +43,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = StartBtn
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 514
+    Left = 519
     Height = 38
     Top = 49
     Width = 90
@@ -57,7 +57,7 @@ object MainForm: TMainForm
     Left = 8
     Height = 120
     Top = 8
-    Width = 496
+    Width = 501
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
     BorderSpacing.Right = 10
@@ -70,7 +70,7 @@ object MainForm: TMainForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 102
-    ClientWidth = 494
+    ClientWidth = 499
     ItemIndex = 0
     Items.Strings = (
       '1/2'
@@ -81,7 +81,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface2
-      Left = 233
+      Left = 238
       Height = 17
       Top = 67
       Width = 134
@@ -94,7 +94,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Interface1
-      Left = 233
+      Left = 238
       Height = 17
       Top = 14
       Width = 134
@@ -109,7 +109,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape1
-      Left = 370
+      Left = 375
       Height = 37
       Top = 4
       Width = 80
@@ -124,7 +124,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface1
       AnchorSideTop.Side = asrCenter
-      Left = 455
+      Left = 460
       Height = 10
       Top = 17
       Width = 20
@@ -137,7 +137,7 @@ object MainForm: TMainForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Interface2
       AnchorSideTop.Side = asrCenter
-      Left = 455
+      Left = 460
       Height = 10
       Top = 70
       Width = 20
@@ -150,7 +150,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = Shape2
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Shape2
-      Left = 370
+      Left = 375
       Height = 37
       Top = 57
       Width = 80
@@ -167,7 +167,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 4
-      Width = 149
+      Width = 154
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -188,7 +188,7 @@ object MainForm: TMainForm
       Left = 64
       Height = 37
       Top = 57
-      Width = 149
+      Width = 154
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 20
       ItemHeight = 0
@@ -207,7 +207,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 17
     Top = 522
-    Width = 612
+    Width = 617
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
     Color = clDefault
@@ -223,14 +223,14 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 288
+    Left = 408
     Height = 32
     Top = 133
-    Width = 316
+    Width = 201
     Anchors = [akTop, akRight]
     BorderSpacing.Top = 5
     BorderSpacing.Right = 8
-    Caption = 'Clear browser cache and cookies at GUI startup'
+    Caption = 'Clear cookies at GUI startup'
     OnClick = ClearBoxClick
     TabOrder = 3
   end
@@ -240,9 +240,9 @@ object MainForm: TMainForm
     Left = 8
     Height = 32
     Top = 133
-    Width = 181
+    Width = 122
     BorderSpacing.Right = 8
-    Caption = 'AutoStart (experimental)'
+    Caption = 'Autostart (exp)'
     OnChange = AutostartBoxChange
     TabOrder = 4
   end
@@ -256,7 +256,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 95
     Top = 427
-    Width = 612
+    Width = 617
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Top = 4
     Font.Height = -13
@@ -266,6 +266,16 @@ object MainForm: TMainForm
     ScrollBars = ssVertical
     TabOrder = 5
     WantReturns = False
+  end
+  object VPNDefBox: TCheckBox
+    AnchorSideTop.Control = ClearBox
+    Left = 179
+    Height = 32
+    Top = 133
+    Width = 181
+    Anchors = [akTop]
+    Caption = '(-) first vpn default route'
+    TabOrder = 6
   end
   object Timer1: TTimer
     Enabled = False
