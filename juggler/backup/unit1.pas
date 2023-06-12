@@ -175,7 +175,8 @@ begin
     D.Add('');
     D.Add('echo "Start of the ' + VPN2 + '.service and ping, wait..."');
     D.Add('systemctl start ' + VPN2);
-    D.Add('umount -l /etc/resolv.conf 2>/dev/null'); //ROSA, свободное изменение DNS
+    //ROSA и другие, свободное изменение DNS
+    D.Add('umount -l /etc/resolv.conf 2>/dev/null');
 
     //Важная задержка для WireGuard! Иначе не успевает создать Keypar!
     D.Add('');
