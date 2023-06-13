@@ -5,7 +5,7 @@ The main switch script is in: `/etc/juggler/juggler.sh`
   
 The `Juggler` allows you to connect to vpn2 via vpn1 and vice versa, even if vpn2 is blocked. It is important that these are different protocols: WireGuard and OpenVPN. [LuntikWG](https://github.com/AKotov-dev/luntikwg) (mandatory) and [OpenVPN-GUI](https://github.com/AKotov-dev/OpenVPN-GUI), [ProtonVPN-GUI](https://github.com/AKotov-dev/protonvpn-gui) or [Luntik](https://github.com/AKotov-dev/luntik) are used as the main clients/services.  
   
-Different Linux systems use different network tools. If switching from one VPN to another does not occur, installing this checker will allow you to attempt to withdraw the default route for a working VPN1 after connecting a blocked VPN2.
+`VPN2 - default gateway` - Different Linux systems use different network tools. If switching from one VPN to another does not occur, installing this checker will allow you to attempt to withdraw the default route for a working VPN1 after connecting a blocked VPN2.
 
 How it works:
 --
