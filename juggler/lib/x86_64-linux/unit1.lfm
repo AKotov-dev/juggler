@@ -237,14 +237,16 @@ object MainForm: TMainForm
   object AutostartBox: TCheckBox
     AnchorSideTop.Control = ClearBox
     AnchorSideRight.Side = asrBottom
-    Left = 8
+    Left = 192
     Height = 32
     Top = 133
     Width = 122
+    Anchors = [akTop]
     BorderSpacing.Right = 8
     Caption = 'Autostart (exp)'
     OnChange = AutostartBoxChange
     TabOrder = 4
+    Visible = False
   end
   object PingMemo: TMemo
     AnchorSideLeft.Control = Owner
@@ -268,13 +270,14 @@ object MainForm: TMainForm
     WantReturns = False
   end
   object VPNDefBox: TCheckBox
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = ClearBox
     AnchorSideRight.Control = ClearBox
-    Left = 253
+    Left = 8
     Height = 32
     Top = 133
     Width = 157
-    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 8
     BorderSpacing.Right = 10
     Caption = 'VPN2 - default route'
     TabOrder = 6
