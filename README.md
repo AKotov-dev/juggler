@@ -12,5 +12,7 @@ Upload `*.conf` and `*.ovpn` configurations to `LuntikWG` and to any other clien
 ![](https://github.com/AKotov-dev/juggler/blob/main/ScreenShot5.png)  
   
 `VPN2 - default route` - Different Linux systems use different network tools. If switching from one VPN to another does not occur, installing this checker will allow you to attempt to withdraw the default route for a working VPN1 after connecting a blocked VPN2.
+
+**Note_1:** If the first connection attempt fails, try connecting again.
   
-**Note:** Your individual `systemd` services and interfaces can be used as services and interfaces for monitoring and launching. Don't forget to open the necessary `iptables` ports. The Internet should be free!  
+**Note_2:** Your individual `systemd` services and interfaces can be used as services and interfaces for monitoring and launching. Don't forget to open the necessary `iptables` ports. The Internet should be free!  
