@@ -3,6 +3,7 @@ object MainForm: TMainForm
   Height = 550
   Top = 125
   Width = 629
+  ActiveControl = VPNService1
   Caption = 'juggler'
   ClientHeight = 550
   ClientWidth = 629
@@ -176,6 +177,7 @@ object MainForm: TMainForm
         'luntikwg'
         'openvpngui'
         'protonvpn'
+        'sstp-connector'
       )
       OnChange = VPNService1Change
       TabOrder = 0
@@ -197,6 +199,7 @@ object MainForm: TMainForm
         'luntikwg'
         'openvpngui'
         'protonvpn'
+        'sstp-connector'
       )
       OnChange = VPNService2Change
       TabOrder = 2
@@ -237,14 +240,16 @@ object MainForm: TMainForm
   object AutostartBox: TCheckBox
     AnchorSideTop.Control = ClearBox
     AnchorSideRight.Side = asrBottom
-    Left = 8
+    Left = 192
     Height = 32
     Top = 133
     Width = 122
+    Anchors = [akTop]
     BorderSpacing.Right = 8
     Caption = 'Autostart (exp)'
     OnChange = AutostartBoxChange
     TabOrder = 4
+    Visible = False
   end
   object PingMemo: TMemo
     AnchorSideLeft.Control = Owner
@@ -268,13 +273,14 @@ object MainForm: TMainForm
     WantReturns = False
   end
   object VPNDefBox: TCheckBox
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = ClearBox
     AnchorSideRight.Control = ClearBox
-    Left = 253
+    Left = 8
     Height = 32
     Top = 133
     Width = 157
-    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 8
     BorderSpacing.Right = 10
     Caption = 'VPN2 - default route'
     TabOrder = 6

@@ -100,16 +100,24 @@ end;
 
 procedure TMainForm.VPNService1Change(Sender: TObject);
 begin
-  if VPNService1.ItemIndex <> 1 then Interface1.Text := 'tun0'
-  else
-    Interface1.Text := 'wg0';
+  case VPNService1.Text of
+    'luntik': Interface1.Text := 'tun0';
+    'luntikwg': Interface1.Text := 'wg0';
+    'openvpngui': Interface1.Text := 'tun0';
+    'protonvpn': Interface1.Text := 'tun0';
+    'sstp-connector': Interface1.Text := 'ppp0';
+  end;
 end;
 
 procedure TMainForm.VPNService2Change(Sender: TObject);
 begin
-  if VPNService2.ItemIndex <> 1 then Interface2.Text := 'tun0'
-  else
-    Interface2.Text := 'wg0';
+  case VPNService2.Text of
+    'luntik': Interface2.Text := 'tun0';
+    'luntikwg': Interface2.Text := 'wg0';
+    'openvpngui': Interface2.Text := 'tun0';
+    'protonvpn': Interface2.Text := 'tun0';
+    'sstp-connector': Interface2.Text := 'ppp0';
+  end;
 end;
 
 procedure TMainForm.StartBtnClick(Sender: TObject);
@@ -156,20 +164,27 @@ begin
     D.Add('wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
     D.Add('warp-cli --accept-tos disconnect > /dev/null 2>&1');
 
+    //Задержка и кол-во попыток
+    D.Add('');
+    D.Add('delay=5');
+    D.Add('attempt=10');
+
     //Cтарт первого подключения
     D.Add('');
     D.Add('echo "Start of the ' + VPN1 + '.service and ping, wait..."');
     D.Add('systemctl start ' + VPN1);
 
-    //Количество попыток attempt
-    D.Add('');
-    D.Add('attempt=10');
     D.Add('');
     D.Add('i=0; until [[ $(ip -br a | grep ' + IF1 +
       ') && $(fping google.com) ]]; do sleep 1');
     D.Add('((i++)); if [[ $i -gt $attempt ]]; then systemctl stop ' +
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
+
+    //Задержка переходных процессов: интерфейс появляется и пинг не пропадает (SSTP)
+    D.Add('');
+    D.Add('echo "Transient delay ($delay sec...)"');
+    D.Add('sleep $delay');
 
     //Cтарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
     D.Add('');
@@ -183,16 +198,13 @@ begin
     begin
       D.Add('');
       D.Add('#Delete the route of the first VPN');
-      D.Add('if [[ $(ip r | grep 0.0.0.0) ]]; then');
-      D.Add('ip r flush $(ip r | grep "0.0.0.0") | head -n1');
-      D.Add('   else');
+      D.Add('[[ $(ip r | grep 0.0.0.0) ]] && ip r flush $(ip r | grep "0.0.0.0") | head -n1');
       D.Add('[[ $(ip r show table all | grep "default dev wg0") ]] && ip r flush default dev wg0 table 51820');
-      D.Add('fi');
+      D.Add('[[ $(ip r | grep "default dev ppp0") ]] && ip r flush default dev ppp0');
     end;
 
     //Важная задержка для WireGuard! Иначе не успевает создать Keypar!
     D.Add('');
-    D.Add('delay=5');
     D.Add('echo "Delay in switching the first and second VPN ($delay sec)..."');
     D.Add('sleep $delay');
 

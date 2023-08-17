@@ -3,6 +3,7 @@ object MainForm: TMainForm
   Height = 550
   Top = 125
   Width = 629
+  ActiveControl = VPNService1
   Caption = 'juggler'
   ClientHeight = 550
   ClientWidth = 629
@@ -176,6 +177,7 @@ object MainForm: TMainForm
         'luntikwg'
         'openvpngui'
         'protonvpn'
+        'sstp-connector'
       )
       OnChange = VPNService1Change
       TabOrder = 0
@@ -197,6 +199,7 @@ object MainForm: TMainForm
         'luntikwg'
         'openvpngui'
         'protonvpn'
+        'sstp-connector'
       )
       OnChange = VPNService2Change
       TabOrder = 2
