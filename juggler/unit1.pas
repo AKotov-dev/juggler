@@ -225,7 +225,7 @@ begin
     D.Add('#Stopping connection');
     D.Add('systemctl stop protonvpn openvpngui luntik luntikwg sstp-connector ' +
       VPN1 + ' ' + VPN2 + ' 2>/dev/null; wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
-    D.Add('warp-cli --accept-tos disconnect 2>/dev/null');
+    D.Add('warp-cli --accept-tos disconnect > /dev/null 2>&1');
 
     D.Add('#DNS restore');
     D.Add('if [[ $(systemctl is-active systemd-resolved) == "active" ]]; then');

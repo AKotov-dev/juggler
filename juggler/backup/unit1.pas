@@ -159,7 +159,7 @@ begin
 
     //Стоп всех возможных сервисов, включая Cloudflare (TM) WARP
     D.Add('#Stopping all possible VPN connections');
-    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
+    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg sstp-connector ' +
       VPN1 + ' ' + VPN2 + ' 2>/dev/null');
     D.Add('wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
     D.Add('warp-cli --accept-tos disconnect > /dev/null 2>&1');
@@ -223,7 +223,7 @@ begin
     D.Add('     else');
 
     D.Add('#Stopping connection');
-    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg ' +
+    D.Add('systemctl stop protonvpn openvpngui luntik luntikwg sstp-connector ' +
       VPN1 + ' ' + VPN2 + ' 2>/dev/null; wg-quick down /etc/luntikwg/wg0.conf 2>/dev/null');
     D.Add('warp-cli --accept-tos disconnect 2>/dev/null');
 

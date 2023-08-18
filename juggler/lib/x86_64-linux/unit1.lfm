@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 280
-  Height = 550
-  Top = 125
+  Left = 278
+  Height = 570
+  Top = 124
   Width = 629
   ActiveControl = VPNService1
   Caption = 'juggler'
-  ClientHeight = 550
+  ClientHeight = 570
   ClientWidth = 629
   OnCreate = FormCreate
   OnResize = FormResize
@@ -17,7 +17,7 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = PingMemo
     Left = 0
-    Height = 264
+    Height = 239
     Top = 170
     Width = 629
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -209,7 +209,7 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 533
+    Top = 553
     Width = 629
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2023   URL: https://linuxforum.ru'
@@ -259,8 +259,8 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 95
-    Top = 438
+    Height = 140
+    Top = 413
     Width = 629
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Top = 4
