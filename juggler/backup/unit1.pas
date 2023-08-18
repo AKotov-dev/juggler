@@ -181,9 +181,9 @@ begin
       VPN1 + ' ' + VPN2 + '; exit 1; else echo "' + IF1 +
       ' -> attempt ${i} of ${attempt}"; fi; done');
 
-    //Задержка переходных процессов: интерфейс появляется и пинг не пропадает
+    //Задержка переходных процессов: интерфейс появляется и пинг не пропадает (SSTP)
     D.Add('');
-    D.Add('echo "Delay ($delay sec...)"');
+    D.Add('echo "Transient delay ($delay sec...)"');
     D.Add('sleep $delay');
 
     //Cтарт второго подключения (google.com меняем на ya.ru чтобы избежать дубликатов/защита сайта)
